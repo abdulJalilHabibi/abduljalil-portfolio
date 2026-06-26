@@ -3,8 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Alex Carter — Frontend Developer Portfolio" },
-      { name: "description", content: "Premium portfolio of Alex Carter, frontend developer." },
+      { title: "Abdul Jalil — Frontend" },
+      { name: "description", content: "Portfolio of Abdul Jalil, frontend developer based in Kabul." },
     ],
   }),
   component: Index,

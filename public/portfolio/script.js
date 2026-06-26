@@ -68,9 +68,8 @@
   if (typedEl) {
     const phrases = [
       'Frontend Developer',
-      'React Engineer',
-      'UI Implementer',
-      'Design Engineer',
+      'React Enthusiast',
+      'UI Engineer',
     ];
     let p = 0, c = 0, deleting = false;
     const tick = () => {

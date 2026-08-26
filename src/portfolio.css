@@ -311,18 +311,58 @@
   color: var(--portfolio-brand-2);
 }
 
+/* ---------- Horizontal expanding nav ---------- */
+.portfolio-page .nav-expand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
 .portfolio-page .nav-links {
   display: flex;
-  gap: 1.6rem;
+  align-items: center;
+  gap: 1.4rem;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(14px) scale(0.98);
+  pointer-events: none;
+  transition:
+    max-width 0.62s var(--portfolio-ease),
+    opacity 0.4s var(--portfolio-ease),
+    transform 0.62s var(--portfolio-ease),
+    padding 0.5s var(--portfolio-ease);
+}
+
+.portfolio-page .nav-expand.open .nav-links {
+  max-width: min(70vw, 620px);
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+  padding-right: 0.4rem;
 }
 
 .portfolio-page .nav-links a {
   font-size: 0.92rem;
   color: var(--portfolio-text-muted);
   position: relative;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    color 0.25s var(--portfolio-ease),
+    opacity 0.35s var(--portfolio-ease),
+    transform 0.35s var(--portfolio-ease);
+}
+
+.portfolio-page .nav-expand.open .nav-links a {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .portfolio-page .nav-links a:hover,
+.portfolio-page .nav-links a:focus-visible,
 .portfolio-page .nav-links a.active {
   color: var(--portfolio-text);
 }
@@ -341,40 +381,66 @@
 }
 
 .portfolio-page .nav-links a:hover::after,
+.portfolio-page .nav-links a:focus-visible::after,
 .portfolio-page .nav-links a.active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.portfolio-page .menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  width: 38px;
-  height: 38px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
+.portfolio-page .nav-toggle {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
   border: 1px solid var(--portfolio-border);
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    background 0.3s var(--portfolio-ease),
+    border-color 0.3s var(--portfolio-ease),
+    transform 0.3s var(--portfolio-ease);
 }
 
-.portfolio-page .menu-toggle span {
+.portfolio-page .nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--portfolio-border-2);
+  transform: translateY(-1px);
+}
+
+.portfolio-page .nav-toggle:focus-visible {
+  outline: 2px solid var(--portfolio-brand-2);
+  outline-offset: 3px;
+}
+
+.portfolio-page .nav-toggle-bars {
+  display: grid;
+  gap: 5px;
+}
+
+.portfolio-page .nav-toggle-bars span {
+  display: block;
   width: 18px;
   height: 2px;
+  border-radius: 2px;
   background: var(--portfolio-text);
-  transition: transform 0.3s var(--portfolio-ease), opacity 0.3s;
+  transition: transform 0.4s var(--portfolio-ease), width 0.4s var(--portfolio-ease);
 }
 
-.portfolio-page .menu-toggle.open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+.portfolio-page .nav-toggle.open .nav-toggle-bars span:nth-child(1) {
+  transform: translateY(3.5px) rotate(45deg);
 }
 
-.portfolio-page .menu-toggle.open span:nth-child(2) {
-  opacity: 0;
+.portfolio-page .nav-toggle.open .nav-toggle-bars span:nth-child(2) {
+  transform: translateY(-3.5px) rotate(-45deg);
 }
 
-.portfolio-page .menu-toggle.open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-page .nav-links,
+  .portfolio-page .nav-links a,
+  .portfolio-page .nav-toggle-bars span {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ---------- Buttons ---------- */

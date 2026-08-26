@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Portfolio } from "../components/portfolio/Portfolio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,16 +13,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <iframe
-      src="/portfolio/index.html"
-      title="Portfolio"
-      style={{
-        position: "fixed",
-        inset: 0,
-        width: "100vw",
-        height: "100vh",
-        border: 0,
-      }}
-    />
+    <div className="portfolio-page">
+      <Portfolio />
+    </div>
   );
 }

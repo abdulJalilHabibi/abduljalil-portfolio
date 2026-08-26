@@ -15,6 +15,7 @@
 
     /* Linting */
     "allowJs": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": false,

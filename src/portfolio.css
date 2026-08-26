@@ -4,8 +4,8 @@
 
 /* ---------- Design tokens ---------- */
 :root {
-  --portfolio-bg: #07070d;
-  --portfolio-bg-2: #0d0d1a;
+  --portfolio-bg: #070a1a;
+  --portfolio-bg-2: #0c1030;
   --portfolio-surface: rgba(255, 255, 255, 0.04);
   --portfolio-surface-2: rgba(255, 255, 255, 0.07);
   --portfolio-border: rgba(255, 255, 255, 0.08);

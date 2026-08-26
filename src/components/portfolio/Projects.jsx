@@ -100,7 +100,12 @@ function ProjectCard({ project }) {
       ref={ref}
     >
       <div className="project-img">
-        <img src={project.image} alt={project.title} loading="lazy" />
+        <img
+          src={project.image}
+          alt={project.alt || `${project.title} project screenshot`}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <div className="project-body">
         <h3>{project.title}</h3>

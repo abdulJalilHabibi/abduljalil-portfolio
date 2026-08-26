@@ -1202,36 +1202,26 @@
 }
 
 @media (max-width: 760px) {
-  .portfolio-page .menu-toggle {
-    display: inline-flex;
-  }
-
   .portfolio-page .nav-links {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background: rgba(10, 10, 20, 0.92);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--portfolio-border);
-    border-radius: 18px;
-    padding: 1rem 1.4rem;
     gap: 1rem;
-    transform: translateY(-12px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s var(--portfolio-ease);
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
-  .portfolio-page .nav-links.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
+  .portfolio-page .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portfolio-page .nav-expand.open .nav-links {
+    max-width: calc(100vw - 11rem);
+  }
+
+  .portfolio-page .nav-links a {
+    font-size: 0.85rem;
   }
 
   .portfolio-page .navbar {
-    border-radius: 22px;
+    border-radius: 999px;
   }
 
   .portfolio-page .stats {

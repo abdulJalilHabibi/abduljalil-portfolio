@@ -1,12 +1,42 @@
 import { useReveal } from "../../hooks/useReveal";
 import calculatorAsset from "../../assets/calculator.png.asset.json";
 import chefAsset from "../../assets/chef.png.asset.json";
+import fxchecker from "../../assets/fx-checker.png.asset.json";
 import extensionAsset from "../../assets/extension.png.asset.json";
 import farawayAsset from "../../assets/faraway.png.asset.json";
 import typingAsset from "../../assets/typing.png.asset.json";
 import vanlifeAsset from "../../assets/vanlife.png.asset.json";
+import product from "../../assets/product.png.asset.json";
+import movie from "../../assets/movie.png.asset.json";
 
 const projects = [
+  {
+    title: "FX Checker | Real-Time Currency Converter",
+    description:
+      "FX Checker is a responsive currency conversion dashboard built with React.",
+    image: product.url,
+    alt: "FX Checker currency converter dashboard showing live exchange rates, currency conversion, historical rate chart, currency comparison, favorite pairs, and conversion history.",
+    tech: ["React", "API", "Tailwind CSS"],
+    live: "https://foriegn-exchange-currency.vercel.app/",
+  },
+  {
+    title: "Product List with Cart | E-Commerce Shopping Cart",
+    description:
+      "Responsive React e-commerce app with product listing, cart management, and quantity controls.",
+    image: fxchecker.url,
+    alt: "Responsive product list and shopping cart interface showing product cards, selected items, quantities, and order total.",
+    tech: ["React", "LocalStorage", "Tailwind CSS"],
+    live: "https://product-list-cart-nu.vercel.app/",
+  },
+  {
+    title: "Movie List | Movie Discovery App",
+    description:
+      "Movie List is a responsive React app for discovering, searching, and exploring movies using a movie API.",
+    image: movie.url,
+    alt: "Movie List app displaying a responsive grid of movie cards with posters, titles, and ratings.",
+    tech: ["React", "REST API", "Tailwind CSS"],
+    live: "https://use-popcorn-ruby.vercel.app/",
+  },
   {
     title: "Chef Claude",
     description:
@@ -71,7 +101,10 @@ export function Projects() {
   return (
     <section id="projects" className="section">
       <div className="container">
-        <div className={`section-head reveal ${headVisible ? "visible" : ""}`} ref={headRef}>
+        <div
+          className={`section-head reveal ${headVisible ? "visible" : ""}`}
+          ref={headRef}
+        >
           <span className="section-eyebrow">Selected work</span>
           <h2 className="section-title">
             Recent <span className="gradient-text">projects</span>

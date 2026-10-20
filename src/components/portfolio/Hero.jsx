@@ -4,7 +4,7 @@ import { SocialLinks } from "./SocialLinks";
 
 const phrases = ["Frontend Developer", "React Enthusiast", "UI Engineer"];
 const heroImage =
-  "/__l5e/assets-v1/f9ba9f21-297e-4d1d-9ff1-4207e0e11886/abdul-jalil.png";
+  "/images/hero.png";
 
 export function Hero() {
   const typed = useTypingEffect(phrases);

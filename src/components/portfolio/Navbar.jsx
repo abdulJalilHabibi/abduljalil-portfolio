@@ -12,8 +12,18 @@ const navLinks = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navRef = useRef(null);
   const activeId = useScrollActive(navLinks.map((n) => n.href.slice(1)));
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 25);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -31,10 +41,40 @@ export function Navbar() {
     };
   }, [open]);
 
+  const handleLinkClick = (e, href) => {
+    setOpen(false);
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const id = href.slice(1);
+      if (id === "home" || !id) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        const target = document.getElementById(id);
+        if (target) {
+          const navOffset = 85;
+          const targetTop =
+            target.getBoundingClientRect().top + window.pageYOffset - navOffset;
+          window.scrollTo({ top: targetTop, behavior: "smooth" });
+        }
+      }
+      try {
+        window.history.pushState(null, "", href);
+      } catch (_) {}
+    }
+  };
+
   return (
-    <header className="navbar glass" id="navbar" ref={navRef}>
+    <header
+      className={`navbar glass ${scrolled ? "scrolled" : ""}`}
+      id="navbar"
+      ref={navRef}
+    >
       <div className="container nav-inner">
-        <a href="#home" className="logo" onClick={() => setOpen(false)}>
+        <a
+          href="#home"
+          className="logo"
+          onClick={(e) => handleLinkClick(e, "#home")}
+        >
           <span className="logo-mark">J</span>
           <span className="logo-text">
             Jalil<span className="dot">.</span>
@@ -55,7 +95,7 @@ export function Navbar() {
                 tabIndex={open ? 0 : -1}
                 style={{ transitionDelay: `${open ? 90 + i * 45 : 0}ms` }}
                 className={activeId === link.href.slice(1) ? "active" : ""}
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleLinkClick(e, link.href)}
               >
                 {link.label}
               </a>

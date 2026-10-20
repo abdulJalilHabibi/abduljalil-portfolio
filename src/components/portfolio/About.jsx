@@ -2,14 +2,15 @@ import { useCountUp } from "../../hooks/useCountUp";
 import { useReveal } from "../../hooks/useReveal";
 
 const aboutImage =
-  "/__l5e/assets-v1/f9ba9f21-297e-4d1d-9ff1-4207e0e11886/abdul-jalil.png";
+  "/images/about.png";
 
 export function About() {
   const [imgRef, imgVisible] = useReveal();
   const [contentRef, contentVisible] = useReveal();
-  const [projectsRef, projectsValue] = useCountUp(6, { suffix: "" });
-  const [reposRef, reposValue] = useCountUp(13, { suffix: "" });
-  const [yearsRef, yearsValue] = useCountUp(1, { suffix: "" });
+  const [expRef, expValue, expComplete] = useCountUp(1, { suffix: "+" });
+  const [projectsRef, projectsValue, projectsComplete] = useCountUp(6, { suffix: "" });
+  const [reposRef, reposValue, reposComplete] = useCountUp(13, { suffix: "" });
+  const [yearsRef, yearsValue, yearsComplete] = useCountUp(1, { suffix: "" });
 
   return (
     <section id="about" className="section">
@@ -20,8 +21,8 @@ export function About() {
             alt="Abdul Jalil working at a desk"
             loading="lazy"
           />
-          <div className="exp-chip glass">
-            <strong>1+</strong>
+          <div className={`exp-chip glass ${expComplete ? "completed" : ""}`} ref={expRef}>
+            <strong>{expValue}</strong>
             <span>
               Year
               <br />
@@ -49,21 +50,21 @@ export function About() {
           </p>
 
           <div className="stats">
-            <div className="stat-card glass" ref={projectsRef}>
+            <div className={`stat-card glass ${projectsComplete ? "completed" : ""}`} ref={projectsRef}>
               <i className="fa-solid fa-rocket"></i>
               <div>
                 <strong>{projectsValue}</strong>
                 <span>Projects Shipped</span>
               </div>
             </div>
-            <div className="stat-card glass" ref={reposRef}>
+            <div className={`stat-card glass ${reposComplete ? "completed" : ""}`} ref={reposRef}>
               <i className="fa-brands fa-github"></i>
               <div>
                 <strong>{reposValue}</strong>
                 <span>Repositories</span>
               </div>
             </div>
-            <div className="stat-card glass" ref={yearsRef}>
+            <div className={`stat-card glass ${yearsComplete ? "completed" : ""}`} ref={yearsRef}>
               <i className="fa-solid fa-award"></i>
               <div>
                 <strong>{yearsValue}</strong>

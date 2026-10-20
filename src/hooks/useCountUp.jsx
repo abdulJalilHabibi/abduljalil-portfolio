@@ -1,27 +1,40 @@
 import { useEffect, useRef, useState } from "react";
 
 export function useCountUp(target, options = {}) {
-  const { duration = 1600, threshold = 0.5, suffix = "" } = options;
+  const { duration = 1600, threshold = 0.2, suffix = "", prefix = "" } = options;
   const ref = useRef(null);
   const [value, setValue] = useState(0);
-  const [started, setStarted] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+  const startedRef = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || startedRef.current) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !started) {
-            setStarted(true);
-            const start = performance.now();
+          if (entry.isIntersecting && !startedRef.current) {
+            startedRef.current = true;
+            const startTime = performance.now();
+
             const step = (now) => {
-              const t = Math.min(1, (now - start) / duration);
-              const eased = 1 - Math.pow(1 - t, 3);
-              setValue(Math.floor(eased * target));
-              if (t < 1) requestAnimationFrame(step);
-              else setValue(target);
+              const elapsed = now - startTime;
+              const progress = Math.min(1, elapsed / duration);
+              // Smooth ease-out cubic
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = Math.round(eased * target);
+
+              setValue(current);
+
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                setValue(target);
+                setIsComplete(true);
+              }
             };
+
             requestAnimationFrame(step);
             observer.unobserve(entry.target);
           }
@@ -29,9 +42,10 @@ export function useCountUp(target, options = {}) {
       },
       { threshold }
     );
+
     observer.observe(el);
     return () => observer.disconnect();
-  }, [target, duration, threshold, started]);
+  }, [target, duration, threshold]);
 
-  return [ref, `${value}${suffix}`];
+  return [ref, `${prefix}${value}${suffix}`, isComplete];
 }

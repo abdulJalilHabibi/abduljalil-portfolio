@@ -16,7 +16,7 @@ const skills = [
 
 export function Skills() {
   const [headRef, headVisible] = useReveal();
-  const { widths, setRef } = useSkillBars(skills);
+  const { widths, percents, setRef } = useSkillBars(skills);
 
   return (
     <section id="skills" className="section">
@@ -40,7 +40,7 @@ export function Skills() {
               <header>
                 <i className={skill.icon}></i>
                 <h3>{skill.name}</h3>
-                <span>{skill.percent}%</span>
+                <span>{percents[i]}%</span>
               </header>
               <div className="bar">
                 <div
